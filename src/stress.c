@@ -403,8 +403,13 @@ hogcpu(void)
 int
 hogio(void)
 {
+	long long count=0;
+	long long mask = 0xFF;
 	while (1) {
 		sync();
+		count++;
+		if ((count & mask) == mask)
+			out(stdout, "Called sync() %lli times ...\n", count);
 	}
 
   return 0;
